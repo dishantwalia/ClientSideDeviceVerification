@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">SafteyNetExample</string>
-    <string name="api_key">Your API Key</string>
+    <string name="api_key">Your API KEY</string>
 </resources>

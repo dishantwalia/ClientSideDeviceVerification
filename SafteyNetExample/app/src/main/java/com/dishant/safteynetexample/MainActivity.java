@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.dishant.safteynetexample.Utility.OfflineVerify;
+import com.dishant.safteynetexample.Utility.JWSParser;
 import com.dishant.safteynetexample.Utility.Util;
 import com.dishant.safteynetexample.model.AttestationStatement;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.safetynet.SafetyNet;
 import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                     // Indicates communication with the service was successful.
                                     // Use response.getJwsResult() to get the result data.
                                     String jwsResult = response.getJwsResult();
-                                    AttestationStatement statement = OfflineVerify.parseAndVerify(jwsResult);
+                                    AttestationStatement statement = new JWSParser().parseAndVerify(jwsResult);
                                     if (statement != null) {
                                         displayResults(statement.hasBasicIntegrity(), statement.isCtsProfileMatch());
                                     } else {
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                                 ApiException apiException = (ApiException) e;
                                 // You can retrieve the status code using the
                                 // apiException.getStatusCode() method.
-                                error = apiException.getLocalizedMessage();
+                                error = CommonStatusCodes.getStatusCodeString(apiException.getStatusCode());
                             } else {
                                 // A different, unknown type of error occurred.
                                 error = e.getLocalizedMessage();

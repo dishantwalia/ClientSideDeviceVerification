@@ -43,6 +43,4 @@ dependencies {
     implementation 'com.google.android.gms:play-services-safetynet:15.0.1'
     implementation 'com.google.http-client:google-http-client-jackson2:1.22.0'
 
-    // Apache HttpClient is used to verify the hostname against the signed certificate in OfflineVerify.
-    implementation 'org.apache.httpcomponents:httpclient:4.5.2'
 }
